@@ -1,0 +1,155 @@
+// Here you can add other styles
+.card-menu{
+    // width: 37%;
+    // max-width: 261px;
+    filter: drop-shadow(0px 1px 3px gray);
+    transition: all 0.2s ease;
+}
+
+.card-menu:hover{
+    margin-top: -9px;
+}
+
+.card-menu:active{
+    margin-top: 0;
+}
+
+.breadcrumb-item a:hover{
+    color: #ff9336;
+    text-decoration: none;
+}
+
+.mainDashboard{
+    padding: 2%;
+}
+
+.menu{
+    padding: 0px;
+    height: calc(100vh - 50px);
+    overflow: auto;
+    border-right: 1px solid rgba(0, 0, 21, 0.125);
+}
+
+.menu > ul{
+    border-radius: 0;
+}
+
+.menu::-webkit-scrollbar{
+    display: none;
+}
+
+.mainMenu{
+    padding-left: 0 !important;
+    height: calc(100vh - 50px);
+    overflow: auto;
+    padding-top: 10px;
+    padding-right: 0 !important;
+}
+.mainMenu > .card{
+    border: 0 !important;
+}
+
+.mainMenu::-webkit-scrollbar{
+    display: none;
+}
+
+.c-subheader{
+    filter: drop-shadow(0px 2px 2px rgba(0, 0, 21, 0.125));
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f13b;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background: rgba(136, 136, 136, 0.486); 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(129, 129, 129, 0.822); 
+  }
+
+  .list-group-item.active{
+      background-color: #ff9336 !important;
+      border-color: #ff9336 !important;
+  }
+
+  .page-item.active .page-link{
+    background-color: #ff9336 !important;
+    border-color: #ff9336 !important;
+    color: white !important;
+}
+
+.page-link:hover{
+    color: #ff9336 !important;
+}
+
+.page-link{
+    color: #ff9336 !important;
+}
+
+.pagination{
+    justify-content: center !important;
+}
+
+.mainMenu > .card > .card-body > div > .row > .form-inline > .mr-2{
+    display: none;
+}
+
+.pagination > .disabled > a{
+    color: lightgray !important;
+}
+
+.mainMenu > .card .card-header{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.form-control:focus{
+    color: #768192;
+    background-color: #fff;
+    border-color: #ff9336 !important;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem #ff933645 !important;
+}
+
+.btn-primary{
+    color: #3c4b64;
+    font-weight: 600;
+    background-color: #ffc300 !important;
+    border-color: #ffc300 !important;
+}
+
+.btn-primary:hover{
+    color: #3c4b64;
+    font-weight: 600;
+    background-color: #ffd009 !important;
+    border-color: #ffd009 !important;
+}
+
+.btn-primary:focus{
+    color: #3c4b64;
+    font-weight: 600;
+    box-shadow: 0 0 0 0.2rem #ffc3006e !important;
+}
+
+.modal-warning {
+    pointer-events: none;
+    user-select: none;
+}
+
+tbody > tr > td > .text-center > h2 > svg{
+    display: none;
+}
+
+@media print {
+    @page { size: landscape; }
+  }
