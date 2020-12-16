@@ -99,7 +99,7 @@ render(){
       <CHeaderNav className="px-3">
       {/* <TheHeaderDropdownNotif/> */}
       <div className="d-md-down-none">        
-           Selamat Datang, <span style={{color:'yellow'}} >Dandi</span>
+           Selamat Datang, <span style={{color:'yellow'}} >User</span>
       </div>
         {/* <TheHeaderDropdownTasks/> */}
         {/* <TheHeaderDropdownMssg/> */}

@@ -152,4 +152,21 @@ tbody > tr > td > .text-center > h2 > svg{
 
 @media print {
     @page { size: landscape; }
-  }
+}
+
+.table-srtjln > tbody > tr > .action-button{
+    text-align:center;
+    justify-content:space-evenly;
+    display:flex;
+}
+.table-srtjln > tbody > tr > .action-button > .c-icon{
+    height: 33px;
+    width: 33px;
+    padding: 8px;
+    border-radius: 9px;
+}
+
+.table-srtjln > tbody > tr > .action-button > .c-icon:hover{
+    background-color: #ffa75c !important;
+    color: white !important;
+}

@@ -1,4 +1,4 @@
-import React ,{ useEffect,useState,useRef } from 'react';
+import React ,{ useRef } from 'react';
 import { 
     CButton,
     CModal,
@@ -33,7 +33,7 @@ const Modal = (props) =>{
              <CModalTitle>Preview Surat</CModalTitle>
            </CModalHeader>
            <CModalBody  style={{ overflow:'auto', height:'73vh' }}>
-            <div ref={componentRef} style={{ border:'3px solid lightgray', padding:'10px' }}>
+            <div ref={componentRef} style={{ border:'3px solid lightgray', padding:'10px'}}>
              <table style={{ width:'100%' }} border='0'>
                <tbody>
 
@@ -45,11 +45,11 @@ const Modal = (props) =>{
                          <div style={{ fontSize:'11px' }}>telp. 0895704280410</div>
                          <div style={{ fontSize:'11px' }}>Bandung</div>
                      </td>
-                     <td style={{ textAlign:'left' }}>
+                     <td className="text-left">
                          <div style={{ width:'186px',marginLeft:'auto', height:'100px' }}>Kepada <br/> YTH. {data.kepada}</div>
                      </td>
                  </tr>
-                 <tr style={{ textAlign:'center' }}><td colSpan='2' style={{ textDecoration:'underline',fontSize:'20px',fontWeight:'bold',position:'relative', left:'0',top:'28%' }}>Surat Jalan</td></tr>
+                 <tr className="text-center"><td colSpan='2' style={{ textDecoration:'underline',fontSize:'20px',fontWeight:'bold',position:'relative', left:'0',top:'28%' }}>Surat Jalan</td></tr>
                  <tr><td colSpan='2' style={{fontSize:'11px' }}>No: {' '}{data.noSurat}</td></tr>
                  <tr style={{ borderBottom:'2px solid black',paddingBottom:'10px' ,fontSize:'11px'}}><td colSpan='2'>Harap diterima dengan baik barang - barang tersebut dibawah ini:</td></tr>
                  <tr>
@@ -63,7 +63,7 @@ const Modal = (props) =>{
                        noItemsView={{ noResults: '', noItems: '-' }}
                        scopedSlots = {
                          {
-                           'ket':(item)=>(<td style={{ textAlign:'center' }}>{item.ket === null ? '-' : item.ket}</td>),
+                           'ket':(item)=>(<td className="text-center">{item.ket === null ? '-' : item.ket}</td>),
                           }}
                           />
                      </td>
