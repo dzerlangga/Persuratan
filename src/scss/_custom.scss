@@ -1,13 +1,14 @@
 // Here you can add other styles
 .card-menu{
-    // width: 37%;
-    // max-width: 261px;
     filter: drop-shadow(0px 1px 3px gray);
     transition: all 0.2s ease;
 }
 
 .card-menu:hover{
-    margin-top: -9px;
+    // margin-top: -9px;
+    position: relative;
+    top: -2px;
+    opacity: 0.5;
 }
 
 .card-menu:active{
@@ -151,13 +152,21 @@ tbody > tr > td > .text-center > h2 > svg{
 }
 
 @media print {
-    @page { size: landscape; }
+    @page { 
+        size: 21cm 16cm portrait;
+        margin-top: 20px;
+    }
+
+    .break-page{
+        width: 798px;
+        height: 608px;
+        // background-color: red;
+    }
 }
 
 .table-srtjln > tbody > tr > .action-button{
     text-align:center;
     justify-content:space-evenly;
-    display:flex;
 }
 .table-srtjln > tbody > tr > .action-button > .c-icon{
     height: 33px;
@@ -169,4 +178,17 @@ tbody > tr > td > .text-center > h2 > svg{
 .table-srtjln > tbody > tr > .action-button > .c-icon:hover{
     background-color: #ffa75c !important;
     color: white !important;
+}
+
+.keteranganSRT{
+    max-width: 104px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.fakturMenu{
+    margin-left: 0 !important;
+    padding-left: 10px;
 }

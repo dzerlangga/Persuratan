@@ -15,7 +15,6 @@ class pendataan extends Component{
   }
 componentDidMount(){
     axios.get('/api/users').then(e=>{
-      console.log(e)
        this.setState({
          data : e.data.data
        })

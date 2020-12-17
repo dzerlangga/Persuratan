@@ -14,8 +14,7 @@ class faktur extends Component{
     }
   }
 componentDidMount(){
-    axios.get('/api/users').then(e=>{
-      console.log(e)
+    axios.get('/api/suratJalan').then(e=>{
        this.setState({
          data : e.data.data
        })
@@ -26,15 +25,15 @@ componentDidMount(){
     let { data } = this.state
     return (
       <>
-      <CRow>
-        {data.map(user => {
+      <div className="fakturMenu">
+        {data.map((user,indx) => {
           return(
-            <div>
-              {user.nama}
-            </div>
+            <p key={indx}>
+              {user.kepada}{" "}
+            </p>
           )
         })}
-      </CRow>
+      </div>
       </>
     )
   }

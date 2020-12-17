@@ -1,6 +1,6 @@
 import React, {useState,lazy} from 'react'
 import { CCol , CListGroup ,CListGroupItem,} from '@coreui/react'
-import '../../../scss/_content.scss';
+// import '../../../scss/_content.scss';
 import { jalanMenus } from '../../../@kudan';
 const Rekap =  lazy(()=>(import('./main/rekapSurat')));
 const CreateSurat =  lazy(()=>(import('./main/createSurat')));

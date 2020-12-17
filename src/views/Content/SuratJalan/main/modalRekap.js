@@ -1,4 +1,4 @@
-import React ,{ useRef } from 'react';
+import React ,{ useRef ,useEffect, useState} from 'react';
 import { 
     CButton,
     CModal,
@@ -10,18 +10,26 @@ import {
 } from '@coreui/react';
 import moment from 'moment';
 import ReactToPrint from 'react-to-print';
-// import axios from 'axios';
+import axios from 'axios';
 
 const field = [
-    {key:'noUrut',label:'No',_style:{textAlign:'center',width:'10%'}},
-    {key:'jenis',label:'Macam/Jenis Barang',_style:{textAlign:'center',width:'50%'}},
+    {key:'id',label:'No',_style:{textAlign:'center',width:'10%'}},
+    {key:'jenis_barang',label:'Macam/Jenis Barang',_style:{textAlign:'center',width:'50%'}},
     {key:'jumlah',label:'Jumlah',_style:{textAlign:'center'}},
     {key:'ket',label:'Keterangan',_style:{textAlign:'center'}}
   ]
 
 const Modal = (props) =>{
   const { data, aletFunc, alert ,setData} = props
+  const [datas,setDatas] = useState([])
   const componentRef = useRef();
+  useEffect(()=>{
+    axios.get(`/api/barang/find/${JSON.stringify(data.barangId)}`).then(e=>{
+      if (e.data.status === 200) {
+        setDatas(e.data.data)
+      }
+   })
+  },[])
   return(
         <CModal 
            show={alert} 
@@ -33,7 +41,7 @@ const Modal = (props) =>{
              <CModalTitle>Preview Surat</CModalTitle>
            </CModalHeader>
            <CModalBody  style={{ overflow:'auto', height:'73vh' }}>
-            <div ref={componentRef} style={{ border:'3px solid lightgray', padding:'10px'}}>
+            <div ref={componentRef} style={{ border:'3px solid lightgray', padding:'10px'}} className="break-page">
              <table style={{ width:'100%' }} border='0'>
                <tbody>
 
@@ -55,16 +63,21 @@ const Modal = (props) =>{
                  <tr>
                      <td colSpan="2" style={{ paddingTop:'7px' }}>
                      <CDataTable
-                       items={[]}
+                       items={datas}
                        fields={field}
                        bordered
                        border={true}
+                       itemsPerPage={10}
                        size="sm"
                        noItemsView={{ noResults: '', noItems: '-' }}
                        scopedSlots = {
                          {
+                           'id':(item)=>(<td className="text-center">{item.id}</td>),
                            'ket':(item)=>(<td className="text-center">{item.ket === null ? '-' : item.ket}</td>),
-                          }}
+                           'jenis_barang':(item)=>(<td className="text-center">{item.jenis_barang}</td>),
+                           'jumlah':(item)=>(<td className="text-center">{item.jumlah}</td>),
+                          }
+                        }
                           />
                      </td>
                 </tr>
@@ -95,6 +108,7 @@ const Modal = (props) =>{
            <ReactToPrint
              trigger={() => <CButton color="primary">Print</CButton>}
              content={() => componentRef.current}
+            //  pageStyle={'}
              />
              
            </CModalFooter>

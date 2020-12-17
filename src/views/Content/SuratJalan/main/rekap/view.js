@@ -1,4 +1,4 @@
-import React ,{ useEffect,useState } from 'react';
+import React from 'react';
 import { 
     CCardHeader,
     CCardBody,
@@ -12,7 +12,6 @@ import {
 } from '@coreui/react';
 
   const View = (props) => {
-      console.log(props);
     const { setView, viewData, data, setData} = props
     return(
       <>
@@ -23,12 +22,12 @@ import {
                 </div>
               </CCardHeader>
               <CCardBody>
-                <CForm  >
+                <CForm>
                   <CRow>
 
                     <CFormGroup className="col-sm-6">
                       <CLabel htmlFor="dari">Penulis</CLabel>
-                      <CInput type="text" id="dari" name="dari" readOnly style={{ pointerEvents:'none' ,color:'orange'}} value={data.dari} />
+                      <CInput type="text" id="dari" name="dari" readOnly style={{ pointerEvents:'none' ,color:'orange'}} value={data ? data.dari : ''} />
                     </CFormGroup>
 
                     <CFormGroup className="col-sm-6">
