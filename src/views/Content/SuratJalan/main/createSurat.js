@@ -10,10 +10,12 @@ import {
     CInput,
     CTextarea,
     CButton,
-    CAlert
+    CAlert,
+    CInvalidFeedback
 } from '@coreui/react';
 import axios from 'axios';
 import moment from 'moment';
+import { Kudation } from '../../../../@kudan'
   
 class CreateRekap extends Component {
 constructor(props){
@@ -71,6 +73,12 @@ componentDidMount(){
   this.findDataNoSUrat()  
 }
 
+showErrorValidation(param){
+  const { allData } = this.state;
+  const data = allData.find(e => e.id === param);
+  return data.error;
+}
+
 getHandel(value,type,key = 'value'){
   const { allData } = this.state;
     const newData = allData.find(e => e.id === type);
@@ -89,26 +97,40 @@ storeData(){
     ket: this.handleValue('ket')
   }
 
-  axios.post('/api/suratJalan/post',
-    data,{
-      params: {
-        data: data
-      },
-    }).then(e=>{
-      this.setState({
-        delStatus: e.data.status === 200,
-        ShowNotif: true
-      })
-      if (e.data.status === 200) {
-          setTimeout(() => {
-                // getDataSurat()
-                this.setState({
-                  ShowNotif: false
-                }, this.afterPost())
-                // setNotifShow(false)
-          }, 3000);
-        }
-  }) 
+  const validCheck = {
+    // dari:'required',
+    kepada:'required',
+    // barangId:'required',
+  }
+Kudation.schema(validCheck).validation(data,(val)=>{
+  console.log(val);
+  // if (val.status === 200) {
+    // this.getHandel('cekk data','kepada','error')
+    // return
+  // }
+  // axios.post('/api/suratJalan/post',
+  // data,{
+  //   params: {
+  //     data: data
+  //   },
+  // }).then(e=>{
+  //   this.setState({
+  //     delStatus: e.data.status === 200,
+  //     ShowNotif: true
+  //     })
+  //     if (e.data.status === 200) {
+  //       setTimeout(() => {
+  //               // getDataSurat()
+  //               this.setState({
+  //                 ShowNotif: false
+  //               }, this.afterPost())
+  //               // setNotifShow(false)
+  //             }, 3000);
+  //           }
+  //         }) 
+
+})
+  
 }
 
 afterPost(){
@@ -144,12 +166,15 @@ render(){
 
                     <CFormGroup className="col-sm-6">
                       <CLabel htmlFor="kepada">Kepada</CLabel>
-                      <CInput type="text" name="kepada" value={this.handleValue("kepada")} onChange={e=>{this.getHandel(e.target.value,'kepada')}} />
+                      <CInput invalid = {this.showErrorValidation('kepada') ? true : false} type="text" name="kepada" value={this.handleValue("kepada")} onChange={e=>{
+                        this.getHandel(e.target.value,'kepada')
+                        this.getHandel('','kepada','error')}} />
+                      <CInvalidFeedback>{this.showErrorValidation('kepada')}</CInvalidFeedback>
                     </CFormGroup>
 
                     <CFormGroup className="col-sm-6">
                       <CLabel htmlFor="noSurat">No Surat</CLabel>
-                      <CInput type="text" id="noSurat" name="noSurat" readOnly style={{ pointerEvents:'none' ,color:'orange'}} placeholder="20/SRTJLN01/11" value={this.handleValue("noSurat")} />
+                      <CInput type="text" id="noSurat" name="noSurat" readOnly style={{ pointerEvents:'none' ,color:'orange'}} value={this.handleValue("noSurat")} />
                     </CFormGroup>
 
                     <CFormGroup className="col-sm-6">

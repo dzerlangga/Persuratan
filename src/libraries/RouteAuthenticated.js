@@ -12,8 +12,8 @@ const RouteAuthenticated = ({
   render,
   auth,
   Auth,
-  // fetchMenu,
-  // fetchText,
+  fetchMenu,
+  fetchText,
   ...res
 }) => {
   const isLoggedIn = false
@@ -26,6 +26,7 @@ const RouteAuthenticated = ({
     return <Redirect from="/:any" to="/" />;
   }
   if (isLoggedIn && !isError) {
+    alert('oke')
     // Promise.all([fetchText(), fetchMenu()])
     //   .then(([text, menu]) => {
     //     if (!text.status || !menu.status) {
@@ -59,8 +60,10 @@ const RouteAuthenticated = ({
   );
 };
 
+//page home
 const Home = ({ component: Component, render, auth, Auth, ...res }) => {
   const isLoggedIn = false
+  console.log({...res});
   // const { result: isLoggedIn } = Auth;
   if (isLoggedIn) {
     return <Redirect from="/:any" to="/home/check-in" />;
@@ -78,7 +81,7 @@ const mapState = state => ({
 });
 
 // const mapDispatch = dispatch =>
-//   bindActionCreators({ fetchMenu, fetchText }, dispatch);
+  // bindActionCreators({ fetchMenu, fetchText }, dispatch);
 
 const RouteHome = connect(mapState, null)(Home);
 

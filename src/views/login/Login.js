@@ -1,5 +1,4 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, {Component } from 'react'
 import {
   CButton,
   CCard,
@@ -13,14 +12,95 @@ import {
   CInputGroupPrepend,
   CInputGroupText,
   CRow,
-  CImg
+  CImg,
+  CInvalidFeedback,
+  CAlert
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import axios from 'axios';
+// import { Alert } from "../../modules/component";
 
-const Login = () => {
+const Alert = (props) =>{
+  return(<CAlert closeButton style={{ margin: '0px 17% 20px 17%' }} color="danger"> 
+      { props.data.showErrorValidation('username') + props.data.showErrorValidation('password')} 
+      </CAlert>)
+}
+class Login extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      ShowNotif:false,
+      allData: [
+        {
+          id: "username",
+          value: "",
+          error: ""
+        },
+        {
+          id: "password",
+          value: "",
+          error: ""
+        }
+      ]
+    }
+  }
+
+componentDidMount(){
+  document.getElementById('username').focus()
+}
+
+getHandel(value,type,key = 'value'){
+  const { allData } = this.state;
+    const newData = allData.find(e => e.id === type);
+    Object.assign(newData, { [key]: value });
+    this.setState({
+      allData: allData
+    });
+}
+
+handleValue(param) {
+  const { allData } = this.state;
+    const data = allData.find(e => e.id === param);
+    return data.value;
+}
+
+login(){
+  if (this.handleValue('username') == "" || this.handleValue('password') == "") {
+    this.handleValue('username') == '' && this.getHandel('data harus di isi','username','error')
+    this.handleValue('password') == '' && this.getHandel('data harus di isi','password','error')
+    return
+  }
+  let datas = {
+    username: this.handleValue('username'),
+    password: this.handleValue('password')
+  }
+  axios.get(`api/users/findUser`,{params: datas}).then(e=>{
+    if (e.data.status === 200) {
+      alert('mantap')
+    }else{
+      this.setState({ShowNotif: true})
+      this.getHandel(e.data.msg,e.data.error,'error')
+    }
+  })
+}
+
+showErrorValidation(param){
+  const { allData } = this.state;
+  const data = allData.find(e => e.id === param);
+  return data.error;
+}
+
+closeErrorValidation(param){
+  this.getHandel('',param,'error')
+  this.setState({ShowNotif: false})
+}
+
+render(){
+  const { ShowNotif } = this.state
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
+       {ShowNotif && <Alert data={this}/>}
         <CRow className="justify-content-center">
           <CCol md="8">
             <CCardGroup>
@@ -28,14 +108,19 @@ const Login = () => {
                 <CCardBody>
                   <CForm>
                     <h1>Login</h1>
-                    <p className="text-muted">Sign In to your account</p>
+                    <p className="text-muted">Masukan Akun Anda</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                         <CInputGroupText>
                           <CIcon name="cil-user" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="text" placeholder="Username" autoComplete="username" />
+                      <CInput invalid = {this.showErrorValidation('username') ? true : false} type="text"  placeholder="Username" value={this.handleValue("username")} id="username" 
+                        onChange={e=>{
+                          this.getHandel(e.target.value,'username')
+                          this.closeErrorValidation('username')
+                        }} />
+                        <CInvalidFeedback>{this.showErrorValidation('username')}</CInvalidFeedback>
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
@@ -43,36 +128,28 @@ const Login = () => {
                           <CIcon name="cil-lock-locked" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" autoComplete="current-password" />
+                      <CInput invalid = {this.showErrorValidation('password') ? true : false} type="password" placeholder="Password" value={this.handleValue("password")} 
+                        onChange={e=>{
+                          this.getHandel(e.target.value,'password')
+                          this.closeErrorValidation('password')
+                        }} />
+                        <CInvalidFeedback>{this.showErrorValidation('password')}</CInvalidFeedback>
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton color="warning" className="px-4" style={{ color:'white' }}>Login</CButton>
+                        <CButton type="submit" color="warning" className="px-4" style={{ color:'white' }} onClick={_=>this.login()}>Login</CButton>
                       </CCol>
-                      {/* <CCol xs="6" className="text-right">
-                        <CButton color="link" className="px-0">Forgot password?</CButton>
-                      </CCol> */}
                     </CRow>
                   </CForm>
                 </CCardBody>
               </CCard>
-              <CCard className="text-white bg-warning py-5 d-md-down-none" style={{ width: '44%' }}>
+              <CCard className="text-white bg-warning py-5 d-md-down-none" style={{ width: '44%', justifyContent:'center' }}>
               <CImg
-            style={{ width: '341px', maxWidth: '99%', opacity: '0.8' }}
-            src={'avatars/gc.png'}
-            className="c-avatar-img"
-            alt="admin@bootstrapmaster.com"
-          />
-                {/* <CCardBody className="text-center">
-                  <div>
-                    <h2>Sign up</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.</p>
-                    <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
-                    </Link>
-                  </div>
-                </CCardBody> */}
+                style={{ width: '341px', maxWidth: '99%', opacity: '0.8' }}
+                src={'avatars/gc.png'}
+                className="c-avatar-img"
+                alt="admin@bootstrapmaster.com"
+              />
               </CCard>
             </CCardGroup>
           </CCol>
@@ -80,6 +157,7 @@ const Login = () => {
       </CContainer>
     </div>
   )
+}
 }
 
 export default Login
