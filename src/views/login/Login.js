@@ -18,6 +18,9 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import axios from 'axios';
+import { connect } from "react-redux";
+import * as LoginAction from "./redux/action";
+import { bindActionCreators } from "redux";
 // import { Alert } from "../../modules/component";
 
 const Alert = (props) =>{
@@ -43,6 +46,7 @@ class Login extends Component {
         }
       ]
     }
+    // this.login = this.login.bind(this)
   }
 
 componentDidMount(){
@@ -64,7 +68,7 @@ handleValue(param) {
     return data.value;
 }
 
-login(){
+loginHandle(){
   if (this.handleValue('username') == "" || this.handleValue('password') == "") {
     this.handleValue('username') == '' && this.getHandel('data harus di isi','username','error')
     this.handleValue('password') == '' && this.getHandel('data harus di isi','password','error')
@@ -74,13 +78,11 @@ login(){
     username: this.handleValue('username'),
     password: this.handleValue('password')
   }
-  axios.get(`api/users/findUser`,{params: datas}).then(e=>{
-    if (e.data.status === 200) {
-      alert('mantap')
-    }else{
+  this.props.loginGet(datas,res=>{
+    if (res.data.status != 200) {
       this.setState({ShowNotif: true})
-      this.getHandel(e.data.msg,e.data.error,'error')
-    }
+      this.getHandel(res.data.msg,res.data.error,'error')
+     }
   })
 }
 
@@ -137,7 +139,7 @@ render(){
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton type="submit" color="warning" className="px-4" style={{ color:'white' }} onClick={_=>this.login()}>Login</CButton>
+                        <CButton type="submit" color="warning" className="px-4" style={{ color:'white' }} onClick={()=>this.loginHandle()}>Login</CButton>
                       </CCol>
                     </CRow>
                   </CForm>
@@ -145,8 +147,8 @@ render(){
               </CCard>
               <CCard className="text-white bg-warning py-5 d-md-down-none" style={{ width: '44%', justifyContent:'center' }}>
               <CImg
-                style={{ width: '341px', maxWidth: '99%', opacity: '0.8' }}
-                src={'avatars/gc.png'}
+                style={{ width: '341px',borderRadius:0, maxWidth: '99%', opacity: '0.8',margin:'auto' }}
+                src={'avatars/lgDndi.png'}
                 className="c-avatar-img"
                 alt="admin@bootstrapmaster.com"
               />
@@ -160,4 +162,24 @@ render(){
 }
 }
 
-export default Login
+// function mapState(state) {
+//   const { users, authentication } = state;
+//   const { user } = authentication;
+//   return { user, users };
+// }
+
+// const actionCreators = {
+//   loginGet: loginGet
+//   // deleteUser: userActions.delete
+// }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      ...LoginAction
+    },dispatch
+  );
+}
+
+export default connect(null, mapDispatchToProps )(Login);
+// export default Login

@@ -10,6 +10,12 @@ import {
 import CIcon from '@coreui/icons-react'
 
 const TheHeaderDropdown = () => {
+
+  function logout() {
+    localStorage.removeItem('TOKEN_PERSURATAN')
+    window.location.reload();
+  }
+
   return (
     <CDropdown
       inNav
@@ -30,7 +36,7 @@ const TheHeaderDropdown = () => {
           <CIcon name="cil-bell" className="mfe-2" /> 
           Ubah Password
         </CDropdownItem>
-        <CDropdownItem>
+        <CDropdownItem onClick={()=>logout()}>
           <CIcon name="cilAccountLogout" className="mfe-2" />
           Log Out
         </CDropdownItem>

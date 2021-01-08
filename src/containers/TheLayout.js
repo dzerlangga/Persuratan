@@ -14,18 +14,14 @@ const TheLayout = () => {
     window.addEventListener('mousemove',() =>{timer()})
     window.addEventListener('scroll',() =>{timer()})
     window.addEventListener('click',() =>{timer()})
-    //   axios.get(`/api/barang/find/${JSON.stringify(data.barangId)}`).then(e=>{
-      //     if (e.data.status === 200) {
-        //       setDatas(e.data.data)
-        //     }
-        //  })
       },[])
       
       function timer(){
         clearTimeout(setTimes);
         setTimes = setTimeout(() => {
-          window.location = '/'
-        }, 10 * 10000);
+          localStorage.removeItem('TOKEN_PERSURATAN')
+          window.location.reload();
+        }, 10 * 1000);
       }
 
   return (

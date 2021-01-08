@@ -11,17 +11,8 @@ import {
 import {Link, HashRouter, Route, Switch } from 'react-router-dom';
 import CIcon from '@coreui/icons-react'
 import { dataMenus } from '../../@kudan'
-import  axios  from 'axios'
 
 class main extends Component{
-// componentDidMount(){
-//     axios.get('/api/users').then(e=>{
-//        this.setState({
-//          data : e.data.data
-//        })
-//     })
-//   }
-
   render(){
     return (
       <>

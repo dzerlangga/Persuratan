@@ -27,6 +27,13 @@
           to:'/home/pendataan',
           icon:'Pencil',
         },
+        {
+          id:5,
+          header:'Menu Lain',
+          color:'dark',
+          to:'/home/pendataan',
+          icon:'Pencil',
+        },
       ]
 
 export default menus

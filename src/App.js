@@ -3,9 +3,13 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import './assets/scss/style.scss';
 import {Loading}  from "./modules/component";
 import { RouteAuthenticated, RouteHome } from './libraries';
-
+const TheLayout = React.lazy(() => {
+  return new Promise(resolve => setTimeout(resolve, 6 * 1000)).then(
+    () => import('./containers/TheLayout')
+  )
+});
 // Containers
-const TheLayout = React.lazy(() => import('./containers/TheLayout'));
+// const TheLayout = React.lazy(() => import('./containers/TheLayout'));
 
 // Pages
 const Login = React.lazy(() => import('./views/login/Login'));
