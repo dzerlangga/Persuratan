@@ -14,15 +14,16 @@ const TheLayout = () => {
     window.addEventListener('mousemove',() =>{timer()})
     window.addEventListener('scroll',() =>{timer()})
     window.addEventListener('click',() =>{timer()})
-      },[])
+  },[])
       
-      function timer(){
-        clearTimeout(setTimes);
-        setTimes = setTimeout(() => {
-          localStorage.removeItem('TOKEN_PERSURATAN')
-          window.location.reload();
-        }, 10 * 1000);
-      }
+  function timer(){
+    clearTimeout(setTimes);
+    setTimes = setTimeout(() => {
+      localStorage.removeItem('TOKEN_PERSURATAN')
+      localStorage.removeItem('USER_PERSURATAN')
+      window.location.reload();
+    }, 60 * 10000);
+  }
 
   return (
     <div className="c-app c-default-layout">

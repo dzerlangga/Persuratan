@@ -192,3 +192,7 @@ tbody > tr > td > .text-center > h2 > svg{
     margin-left: 0 !important;
     padding-left: 10px;
 }
+
+.pagination > .disabled{
+    display: none;
+}

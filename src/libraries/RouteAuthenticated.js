@@ -13,11 +13,17 @@ const RouteAuthenticated = ({
   Auth,
   fetchMenu,
   fetchText,
+  AuthSelect,
   ...res
 }) => {
   const [isError, setError] = React.useState(false);
   if (!localStorage.getItem('TOKEN_PERSURATAN')) {
     return <Redirect from="/:any" to="/" />;
+  }
+  if (Auth.username === undefined && AuthSelect === null) {
+    localStorage.removeItem('TOKEN_PERSURATAN')
+    return <Redirect from="/:any" to="/" />;
+
   }
   if (localStorage.getItem('TOKEN_PERSURATAN') && !isError)
   return (
@@ -42,7 +48,8 @@ const Home = ({ component: Component, render, auth, Auth, ...res }) => {
 };
 
 const mapState = state => ({
-  Auth: state.Auth
+  Auth: state.Auth,
+  AuthSelect: state.AuthSelect 
 });
 
 function mapDispatchToProps(dispatch) {

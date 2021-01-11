@@ -16,6 +16,8 @@ export function loginGet(datas,_callback){
             }).then(e=>{
                 if (e.data.status === 200) {
                     localStorage.setItem('TOKEN_PERSURATAN',e.data.token)
+                    const user = JSON.stringify(e.data.user)
+                    localStorage.setItem('USER_PERSURATAN',user)
                 }
                         dispatch({
                             type: type.PUT_USER,

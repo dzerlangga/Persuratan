@@ -4,7 +4,7 @@ import './assets/scss/style.scss';
 import {Loading}  from "./modules/component";
 import { RouteAuthenticated, RouteHome } from './libraries';
 const TheLayout = React.lazy(() => {
-  return new Promise(resolve => setTimeout(resolve, 6 * 1000)).then(
+  return new Promise(resolve => setTimeout(resolve, 1 * 1000)).then(
     () => import('./containers/TheLayout')
   )
 });
@@ -19,6 +19,7 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
 class App extends Component {
 
   render() {
+  window.location.replace('?#/');
     return (
       <HashRouter>
           <React.Suspense fallback={Loading}>

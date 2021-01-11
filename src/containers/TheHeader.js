@@ -6,30 +6,29 @@ import {
   CHeaderBrand,
   CHeaderNav,
   CHeaderNavItem,
-  CHeaderNavLink,
+  // CHeaderNavLink,
   CSubheader,
   CBreadcrumbRouter,
   CLink,
   CImg
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
 
 // routes config
 import routes from '../routes'
-
 import { 
   TheHeaderDropdown,
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks
+  // TheHeaderDropdownMssg,
+  // TheHeaderDropdownNotif,
+  // TheHeaderDropdownTasks
 }  from './index'
+  import { UserData } from "../modules/component/DataUser";
 
-// const TheHeader = () => {
   class TheHeader extends Component{
     constructor(props){
       super(props);
       this.state = {
-        date: new Date()
+        date: new Date(),
+        username: UserData.username
       }
     }
   // const dispatch = useDispatch()
@@ -56,26 +55,26 @@ import {
 render(){
   return (
     <CHeader withSubheader style={{ backgroundColor:'#ff9336', color:'white'}}>
-       <CToggler
+       {/* <CToggler
           inHeader
           className="ml-md-3 d-lg-none"
-          style={{pointerEvents:'none'}}
-      >
-      <CImg
-            style={{ width:'60px' }}
-            src={'avatars/gc.png'}
+          style={{pointerEvents:'none',width:'100%'}}
+      > */}
+      {/* <CImg
+            style={{ width:'48px',borderRadius:0 }}
+            src={'avatars/lgDndi.png'}
             className="c-avatar-img"
             alt="admin@bootstrapmaster.com"
-          />
-      </CToggler>
+          /> */}
+      {/* </CToggler> */}
       <CToggler
       inHeader
       className="ml-3 d-md-down-none"
       style={{pointerEvents:'none'}}
       >
       <CImg
-            style={{ width:'60px' }}
-            src={'avatars/gc.png'}
+            style={{ width:'48px',borderRadius:0 }}
+            src={'avatars/lgDndi.png'}
             className="c-avatar-img"
             alt="admin@bootstrapmaster.com"
           />
@@ -99,7 +98,7 @@ render(){
       <CHeaderNav className="px-3">
       {/* <TheHeaderDropdownNotif/> */}
       <div className="d-md-down-none">        
-           Selamat Datang, <span style={{color:'yellow'}} >User</span>
+           Selamat Datang, <span style={{color:'yellow'}} >{this.state.username}</span>
       </div>
         {/* <TheHeaderDropdownTasks/> */}
         {/* <TheHeaderDropdownMssg/> */}
@@ -121,4 +120,4 @@ render(){
 }
 }
 
-export default TheHeader
+export default TheHeader;

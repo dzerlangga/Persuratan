@@ -16,6 +16,7 @@ import {
 import axios from 'axios';
 import moment from 'moment';
 import { Kudation } from '../../../../@kudan'
+import {UserData} from "../../../../modules/component/DataUser";
   
 class CreateRekap extends Component {
 constructor(props){
@@ -27,7 +28,7 @@ constructor(props){
     allData: [
       {
         id: "dari",
-        value: "Deni Romansyah",
+        value: UserData.nama ,
         error: ""
       },
       {
@@ -99,11 +100,31 @@ storeData(){
 
   const validCheck = {
     // dari:'required',
-    kepada:'required',
+    kepada:'required|max-30',
     // barangId:'required',
   }
+   axios.post('/api/suratJalan/post',
+  data,{
+    params: {
+      data: data
+    },
+  }).then(e=>{
+    this.setState({
+      delStatus: e.data.status === 200,
+      ShowNotif: true
+      })
+      if (e.data.status === 200) {
+        setTimeout(() => {
+                // getDataSurat()
+                this.setState({
+                  ShowNotif: false
+                }, this.afterPost())
+                // setNotifShow(false)
+              }, 3000);
+            }
+          }) 
 Kudation.schema(validCheck).validation(data,(val)=>{
-  console.log(val);
+  // console.log(val);
   // if (val.status === 200) {
     // this.getHandel('cekk data','kepada','error')
     // return
@@ -161,7 +182,7 @@ render(){
 
                     <CFormGroup className="col-sm-6">
                       <CLabel htmlFor="dari">Penulis</CLabel>
-                      <CInput type="text" id="dari" name="dari" readOnly style={{ pointerEvents:'none' ,color:'orange'}} value="Deni Romansyah"/>
+                      <CInput type="text" id="dari" name="dari" readOnly style={{ pointerEvents:'none' ,color:'orange'}} value={this.handleValue("dari")}/>
                     </CFormGroup>
 
                     <CFormGroup className="col-sm-6">

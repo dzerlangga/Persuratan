@@ -2,9 +2,9 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import { LoginRducer } from "./views/login/redux/reducers";
 import thunk from 'redux-thunk';
 
-const initialState = {
-  sidebarShow: 'responsive'
-}
+// const initialState = {
+//   sidebarShow: 'responsive'
+// }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 

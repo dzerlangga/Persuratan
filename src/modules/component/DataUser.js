@@ -1,0 +1,1 @@
+export const UserData = JSON.parse(localStorage.getItem('USER_PERSURATAN')) ? JSON.parse(localStorage.getItem('USER_PERSURATAN')) : {};

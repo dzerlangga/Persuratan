@@ -32,27 +32,28 @@ const Kudation = {
       
   
           function required() {
-            if (
-              !Array.isArray(_VALUE) &&
-              _VALUE instanceof Object &&
-              !_VALUE instanceof Date
-            ) {
-              if (!Object.keys(_VALUE).length) {
-                return _CUSTOM_MESSAGE || 'data object harus memiliki satu key'
-              }
-            }
-            if (
-              Array.isArray(_VALUE) &&
-              _VALUE instanceof Object &&
-              !_VALUE instanceof Date
-            ) {
-              if (!_VALUE.length) {
-                return _CUSTOM_MESSAGE || 'data array harus memiliki satu key'
-              }
-            }
-            if (!_VALUE) {
-              return _CUSTOM_MESSAGE || 'data harus di isi'
-            }
+            console.log('masuk');
+            // if (
+            //   !Array.isArray(_VALUE) &&
+            //   _VALUE instanceof Object &&
+            //   !_VALUE instanceof Date
+            // ) {
+            //   if (!Object.keys(_VALUE).length) {
+            //     return _CUSTOM_MESSAGE || 'data object harus memiliki satu key'
+            //   }
+            // }
+            // if (
+            //   Array.isArray(_VALUE) &&
+            //   _VALUE instanceof Object &&
+            //   !_VALUE instanceof Date
+            // ) {
+            //   if (!_VALUE.length) {
+            //     return _CUSTOM_MESSAGE || 'data array harus memiliki satu key'
+            //   }
+            // }
+            // if (!_VALUE) {
+            //   return _CUSTOM_MESSAGE || 'data harus di isi'
+            // }
           }
     
     
@@ -69,6 +70,7 @@ const Kudation = {
                   _RULES = _SCHEMA[key_iterator]
                   if (_RULES) {
                       console.log(_RULES.split('|'));
+                      _call_validation(_RULES.split('|'))
                     continue
                   }
               }
@@ -81,7 +83,10 @@ const Kudation = {
     
        
           function _call_validation(_ARRAY_OF_RULES) {
-            
+            console.log(_ARRAY_OF_RULES,'in array');
+            _ARRAY_OF_RULES.map(e=>{
+              console.log(e);
+            })
           }
     
           _SCHEMA = skema

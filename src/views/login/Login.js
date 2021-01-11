@@ -17,7 +17,7 @@ import {
   CAlert
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import axios from 'axios';
+// import axios from 'axios';
 import { connect } from "react-redux";
 import * as LoginAction from "./redux/action";
 import { bindActionCreators } from "redux";
@@ -147,7 +147,7 @@ render(){
               </CCard>
               <CCard className="text-white bg-warning py-5 d-md-down-none" style={{ width: '44%', justifyContent:'center' }}>
               <CImg
-                style={{ width: '341px',borderRadius:0, maxWidth: '99%', opacity: '0.8',margin:'auto' }}
+                style={{ width: '186px',borderRadius:0, maxWidth: '71%',margin:'auto' }}
                 src={'avatars/lgDndi.png'}
                 className="c-avatar-img"
                 alt="admin@bootstrapmaster.com"

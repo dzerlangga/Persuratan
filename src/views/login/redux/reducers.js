@@ -1,9 +1,10 @@
 import * as type from './type'
 import createReducer  from "../../../libraries/createReducer";
-import { combineReducers } from 'redux'
+// import { combineReducers } from 'redux'
 
 const initialState = {
-    Auth: {}
+    Auth: {},
+    AuthSelect: JSON.parse(localStorage.getItem('USER_PERSURATAN'))
   }
   
 export const LoginRducer = createReducer(initialState, {
@@ -11,7 +12,7 @@ export const LoginRducer = createReducer(initialState, {
       const{ items } = payload.data
       return {
         ...state,
-        Auth: items,
+        Auth: items.user,
       }
     }
   })

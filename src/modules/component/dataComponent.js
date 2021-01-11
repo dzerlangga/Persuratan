@@ -1,8 +1,9 @@
 import React  from 'react';
 import { CImg } from "@coreui/react";
+
 const Loading = (
     <div className="pt-3 text-center">
-    <div className="sk-spinner sk-spinner-pulse" style={{ height:'43em',display:'inline-flex',alignItems:'center',justifyContent:'center',flexDirection:'column' }}>
+    <div className="sk-spinner sk-spinner-pulse" style={{ minHeight:'96vh',display:'inline-flex',alignItems:'center',justifyContent:'center',flexDirection:'column' }}>
     <CImg
       src={'avatars/lgDndi.png'}
       className="c-avatar-img"
