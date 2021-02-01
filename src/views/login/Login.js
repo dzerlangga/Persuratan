@@ -24,8 +24,8 @@ import { bindActionCreators } from "redux";
 // import { Alert } from "../../modules/component";
 
 const Alert = (props) =>{
-  return(<CAlert closeButton style={{ margin: '0px 17% 20px 17%' }} color="danger"> 
-      { props.data.showErrorValidation('username') + props.data.showErrorValidation('password')} 
+  return(<CAlert onClick={()=>props.data.closeAlert()} style={{ margin: '0px 17% 20px 17%' }} color="danger"> 
+      { props.data.state.alert } 
       </CAlert>)
 }
 class Login extends Component {
@@ -33,6 +33,7 @@ class Login extends Component {
     super(props);
     this.state = {
       ShowNotif:false,
+      alert:'',
       allData: [
         {
           id: "username",
@@ -47,10 +48,18 @@ class Login extends Component {
       ]
     }
     // this.login = this.login.bind(this)
+    this.closeAlert = this.closeAlert.bind(this)
   }
 
 componentDidMount(){
   document.getElementById('username').focus()
+}
+
+closeAlert(){
+this.setState({
+  ShowNotif: false,
+  alert:''
+})
 }
 
 getHandel(value,type,key = 'value'){
@@ -79,8 +88,9 @@ loginHandle(){
     password: this.handleValue('password')
   }
   this.props.loginGet(datas,res=>{
-    if (res.data.status != 200) {
-      this.setState({ShowNotif: true})
+    console.log(res);
+    if (res.data.status == 400) {
+      this.setState({ShowNotif: true,alert: res.data.msg})
       this.getHandel(res.data.msg,res.data.error,'error')
      }
   })

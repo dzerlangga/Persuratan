@@ -19,16 +19,15 @@ export function loginGet(datas,_callback){
                     const user = JSON.stringify(e.data.user)
                     localStorage.setItem('USER_PERSURATAN',user)
                 }
-                        dispatch({
-                            type: type.PUT_USER,
-                            data :{
-                                items: e.data
-                            }
-                        })
-                        _callback(e)
+                dispatch({
+                    type: type.PUT_USER,
+                    data :{
+                        items: e.data
+                    }
+                })
+                _callback(e)
             })
             .catch((err)=>{
-                console.log(err);
                 return
             })
         }

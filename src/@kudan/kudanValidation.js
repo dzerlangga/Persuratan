@@ -69,7 +69,8 @@ const Kudation = {
               for (key_iterator in data_object) {
                   _RULES = _SCHEMA[key_iterator]
                   if (_RULES) {
-                      console.log(_RULES.split('|'));
+                      console.log(_RULES.split('|')[0]);
+                      _RULES.split('|')[0]()
                       _call_validation(_RULES.split('|'))
                     continue
                   }
@@ -84,9 +85,6 @@ const Kudation = {
        
           function _call_validation(_ARRAY_OF_RULES) {
             console.log(_ARRAY_OF_RULES,'in array');
-            _ARRAY_OF_RULES.map(e=>{
-              console.log(e);
-            })
           }
     
           _SCHEMA = skema
